@@ -1,0 +1,7 @@
+c:\users\tomasz\documents\visual studio 2013\Projects\PkryServ\PkryServ\bin\Debug\PkryServ.exe.config
+C:\Users\Tomasz\Documents\Visual Studio 2013\Projects\PkryServ\PkryServ\obj\Debug\PkryServ.csprojResolveAssemblyReference.cache
+C:\Users\Tomasz\Documents\Visual Studio 2013\Projects\PkryServ\PkryServ\bin\Debug\PkryServ.exe
+C:\Users\Tomasz\Documents\Visual Studio 2013\Projects\PkryServ\PkryServ\bin\Debug\PkryServ.pdb
+C:\Users\Tomasz\Documents\Visual Studio 2013\Projects\PkryServ\PkryServ\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Tomasz\Documents\Visual Studio 2013\Projects\PkryServ\PkryServ\obj\Debug\PkryServ.exe
+C:\Users\Tomasz\Documents\Visual Studio 2013\Projects\PkryServ\PkryServ\obj\Debug\PkryServ.pdb

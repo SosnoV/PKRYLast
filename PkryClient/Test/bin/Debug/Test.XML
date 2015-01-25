@@ -1,0 +1,483 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Test</name>
+    </assembly>
+    <members>
+        <member name="T:Test.BindingModule">
+            <summary>
+            Klasa pomocnicza przenosząca dane między obiektami różnych klas
+            </summary>
+        </member>
+        <member name="M:Test.BindingModule.CheckPesel(System.String)">
+            <summary>
+            Metoda sprawdzająca poprawność peselu
+            </summary>
+            <param name="pesel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Test.BindingModule.setLogin(System.String)">
+            <summary>
+            Metoda ustawiająca login
+            </summary>
+            <param name="login"></param>
+        </member>
+        <member name="P:Test.BindingModule.myLogin">
+            <summary>
+            Login użytkownika
+            </summary>
+        </member>
+        <member name="T:Test.MsgSignal">
+            <summary>
+            Delegat do obslugi eventu
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:Test.MsgEvent">
+            <summary>
+            Event sluzacy do asychronicznego przesylania wiadomosci w programie
+            </summary>
+        </member>
+        <member name="M:Test.MsgEvent.#ctor(System.Byte[])">
+            <summary>
+            Konstruktor eventu z wiadomoscia
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="P:Test.MsgEvent.msg">
+            <summary>
+            Pole przechowywujace wiadomosc
+            </summary>
+        </member>
+        <member name="T:Test.CommunicationModule">
+            <summary>
+            Klsa obslugujaca komunikacje
+            </summary>
+        </member>
+        <member name="M:Test.CommunicationModule.#ctor">
+            <summary>
+            Konstruktor domyslny
+            </summary>
+        </member>
+        <member name="M:Test.CommunicationModule.Run(System.String,System.String)">
+            <summary>
+            Metoda sluzaca do uruchomienia komunikacji z sererem
+            W wypadku niepowodzenia komunikacja jest zamykana i zwracany jest wynik false
+            </summary>
+            <param name="machineName"></param>
+            <param name="serverName"></param>
+            <returns>True jesli udalo sie polaczyc z serwerem
+            False jesli nie udalo sie polaczyc z serwerem</returns>
+        </member>
+        <member name="M:Test.CommunicationModule.Stop">
+            <summary>
+            Metoda sluzaca do zastopowania klienta TCP
+            </summary>
+        </member>
+        <member name="M:Test.CommunicationModule.SendLogin(System.String)">
+            <summary>
+            Metoda majaca na celu wyslanie loginu do sererwera i oczekiwanie na odpowiedz przy logowaniu
+            </summary>
+            <param name="login"></param>
+            <returns>Zwraca parametr n oznaczjace liczbe wymaganych hashy hasla</returns>
+        </member>
+        <member name="M:Test.CommunicationModule.SendPwd(System.Byte[])">
+            <summary>
+            Metoda sluzaca do potwierdzenia zgodnosci wprowadzonego hasla z tym zapisanym na serwerze
+            </summary>
+            <param name="pwd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Test.CommunicationModule.GetCertificate">
+            <summary>
+            Metoda pozwalajaca uzyskac certyfikat z serwera
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Test.CommunicationModule.Run">
+            <summary>
+            Metoda pozwalajaca na rozpoczecie asynchronicznej komunikacji z serwerem
+            </summary>
+        </member>
+        <member name="M:Test.CommunicationModule.Listen">
+            <summary>
+            Metoda obslugujaca asychroniczne nasluchiwanie z serwera
+            </summary>
+        </member>
+        <member name="M:Test.CommunicationModule.StopListening">
+            <summary>
+            Metoda pozwalajaca zakonczyc nasluchiwanie
+            </summary>
+        </member>
+        <member name="M:Test.CommunicationModule.MsgCame(Test.MsgEvent)">
+            <summary>
+            Metoda obslugujaca rzucanie eventu z wiadomoscia
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.CommunicationModule.UserOnline(System.String)">
+            <summary>
+            Metoda sluzaca do sprawdzenie dostepnosci danego uzytkownika
+            </summary>
+            <param name="userLogin">Nazwa uzytkownika</param>
+        </member>
+        <member name="M:Test.CommunicationModule.GetOnlineUsers">
+            <summary>
+            Metoda sluzaca do pobrania listy aktywnych uzytkownikow z serwera
+            </summary>
+        </member>
+        <member name="M:Test.CommunicationModule.Send(System.Byte[])">
+            <summary>
+            Meoda sluzaca do wysylania danych
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Test.CommunicationModule.ValidateServerCertificate(System.Object,System.Security.Cryptography.X509Certificates.X509Certificate,System.Security.Cryptography.X509Certificates.X509Chain,System.Net.Security.SslPolicyErrors)">
+            <summary>
+            Delegat słuzacy do potwierdzenia autentycznosci serwera
+            </summary>
+            <param name="sender"></param>
+            <param name="certificate"></param>
+            <param name="chain"></param>
+            <param name="sslPolicyErrors"></param>
+            <returns></returns>
+        </member>
+        <member name="E:Test.CommunicationModule.msgSignal">
+            <summary>
+            Pole sluzace do wyslania wydarzenia
+            </summary>
+        </member>
+        <member name="P:Test.CommunicationModule.isRunning">
+            <summary>
+            Pole pozwala sprawdzic czy ropoczelo sie asychroniczne nasluchiwanie
+            </summary>
+        </member>
+        <member name="T:Test.CryptoModule">
+            <summary>
+            Klasa odpowiedzialna za całą funkcjonalność związaną z kryptografią
+            </summary>
+        </member>
+        <member name="M:Test.CryptoModule.HashNTimes(System.Byte[],System.Int32)">
+            <summary>
+            Metoda licząca hash z bajtów n razy
+            </summary>
+            <param name="data"></param>
+            <param name="n"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Test.CryptoModule.Hash(System.Byte[])">
+            <summary>
+            Metoda licząca hash z podanych bajtów
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Test.CryptoModule.Verify(System.Byte[],System.Byte[],System.String)">
+            <summary>
+            Metoda weryfikująca podpisaną wiadomość
+            </summary>
+            <param name="decryptedMsg"></param>
+            <param name="signedMsg"></param>
+            <param name="senderName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Test.CryptoModule.Sign(System.String)">
+            <summary>
+            Metoda podpisująca wiadomość
+            </summary>
+            <param name="msg"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Test.CryptoModule.DecryptMsg(System.Byte[])">
+            <summary>
+            Metoda odszyfrowująca wiadomość
+            </summary>
+            <param name="msg"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Test.CryptoModule.EncryptMsg(System.Byte[],System.String)">
+            <summary>
+            Metoda szyfrująca wiadomość
+            </summary>
+            <param name="msg"></param>
+            <param name="receiverName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Test.CryptoModule.ImportKey(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Boolean,System.Boolean)">
+            <summary>
+            Metoda importująca klucze (prywatne lub publiczne) z certyfikatu
+            </summary>
+            <param name="cert"></param>
+            <param name="isPrivate">
+            true - import klucza prywatnego
+            </param>
+            <param name="isMine">
+            true - import publicznego klucza zalogowanego użytkownika
+            false - import publicznego klucza innego użytkownika
+            </param>
+        </member>
+        <member name="M:Test.CryptoModule.RemoveUserKey(System.String)">
+            <summary>
+            Metoda usuwająca z pamięci klucz użytkownika
+            </summary>
+            <param name="userName"></param>
+        </member>
+        <member name="M:Test.CryptoModule.CreatePublicCertFromRawData(System.Byte[])">
+            <summary>
+            Metoda tworząca certyfikat z kluczem publicznym z przesłanych bajtów
+            </summary>
+            <param name="rawData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Test.CryptoModule.CreatePrivateCertFromRawData(System.Byte[])">
+            <summary>
+            Metoda tworząca certyfikat z parą kluczy z przesłanych bajtów
+            </summary>
+            <param name="rawData"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Test.MainWindow">
+            <summary>
+            Klasa odpowiedzialna za główne okno aplikacji
+            </summary>
+        </member>
+        <member name="M:Test.MainWindow.#ctor">
+            <summary>
+            Konstrukto klasy MainWindow
+            </summary>
+        </member>
+        <member name="M:Test.MainWindow.MsgService(System.Object,Test.MsgEvent)">
+            <summary>
+            Metoda odpowiedzialna za obsluge przychodzacych wiadomosci
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.MainWindow.ConnectMethod">
+            <summary>
+            Metoda odpowiedzialna za procedurę połączenia z innym użytkownikiem
+            </summary>
+        </member>
+        <member name="M:Test.MainWindow.ConnectBtn_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie kliknięcia w przycisk ConnectBtn
+            W szczególności wywoływana jest metoda ConnectMethod()
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.MainWindow.WriteInLog(System.String)">
+            <summary>
+            Metoda wyświetlająca komunikat w Log
+            </summary>
+            <param name="msg">
+            Komunikat do wyświetlenia
+            </param>
+        </member>
+        <member name="M:Test.MainWindow.EnableDisableControls(System.Boolean)">
+            <summary>
+            Metoda włączająca/wyłączajaca kontrolki (przyciski, textbox)
+            </summary>
+            <param name="enabled">
+            True - włączone
+            False - wyłączone
+            </param>
+        </member>
+        <member name="M:Test.MainWindow.MainWindow_Load(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie ładowania komponentu
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.MainWindow.button1_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obslugujaca klikniecie w przycisk sluzacy do pobranie uzytkownikow online
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.MainWindow.ConInputTextBox_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie wciśnięcia klawisza w ConInputTextBox
+            W szczególności wciśnięcie klawisza Enter powoduje wywołanie metody ConnectMethod()
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.MainWindow.DisableLogBtn">
+            <summary>
+            Metoda wyłączająca przycisk LoginBtn
+            </summary>
+        </member>
+        <member name="M:Test.MainWindow.LogBtn_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie kliknięcia w przycisk LogBtn
+            W szczególności wywołuje ona LoginWindow co pozwala na przeprowadzenie procedury logowania
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.MainWindow.MsgTextBox_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie TextChanged
+            Dotyczy okna wyslania wiadomosci
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.MainWindow.SendBtn_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie Click wygenerowane przez przycisk SendBtn
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.MainWindow.TextToSendMethod">
+            <summary>
+            Metoda wysyłająca wiadomość użytkownika
+            </summary>
+        </member>
+        <member name="M:Test.MainWindow.WriteInLogAsThisUser(System.String)">
+            <summary>
+            Metoda wyświetlająca wiadomość napisaną przez użytkownika
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:Test.MainWindow.WriteInLogAsOtherUser(System.String)">
+            <summary>
+            Metoda wyświetlająca wiadomość od innego użytkownika
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:Test.MainWindow.DisconnectBtn_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda słuzaca do rozlaczenia aktualnej rozmowy
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.MainWindow.MainWindow_FormClosed(System.Object,System.Windows.Forms.FormClosedEventArgs)">
+            <summary>
+            Metoda sluzaca do zamkniecia chatu i wylogowania uzytkownika
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:Test.MainWindow.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Test.MainWindow.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Test.MainWindow.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Test.LoginWindow">
+            <summary>
+            Klasa definiująca okno logowania
+            </summary>
+        </member>
+        <member name="M:Test.LoginWindow.#ctor(Test.MainWindow)">
+            <summary>
+            Konstruktor klasy LoginWindow
+            </summary>
+        </member>
+        <member name="M:Test.LoginWindow.LoginMethod">
+            <summary>
+            Metoda służąca do przeprowadzenia procedury logowania
+            </summary>
+        </member>
+        <member name="F:Test.LoginWindow.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Test.LoginWindow.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Test.LoginWindow.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:Test.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:Test.RegisterWindow">
+            <summary>
+            Klasa odpowiedzialna za okno rejestracji
+            </summary>
+        </member>
+        <member name="M:Test.RegisterWindow.#ctor">
+            <summary>
+            Konstruktor klasy RegisterWindow
+            </summary>
+        </member>
+        <member name="M:Test.RegisterWindow.RegisterBtn_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie kliknięcia w przycisk RegisterBtn
+            Metoda jest odpowiedzialna za procedurę rejestracji nowego użytkownika
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.RegisterWindow.SendRegisterMsg(System.String,System.Byte[],System.Byte[])">
+            <summary>
+            Metoda obsługującą wysłanie zadania rejestracji do serwera
+            Metoda jest odpowiedzialna za komunikacje z serwerem podczas przeprowadzania procesu rejestracji
+            </summary>
+            <param name="login">Login uzytkownika</param>
+            <param name="password">Hash hasla</param>
+            <param name="pesel">Hash peselu</param>
+        </member>
+        <member name="F:Test.RegisterWindow.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Test.RegisterWindow.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Test.RegisterWindow.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Test.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Test.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Test.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>
